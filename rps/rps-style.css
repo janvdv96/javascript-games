@@ -1,0 +1,93 @@
+body {
+    background: black;
+}
+
+#header {
+    text-align: center;
+    font-size: 36px;
+}
+
+#container {
+    margin: auto;
+    background: white;
+    height: 600px;
+    width: 600px;
+    position: relative;
+}
+
+#button-box {
+    display: flex;
+    margin: auto;
+    width: 85%;
+    justify-content: space-between;
+}
+
+#rock-button {
+    border: 1px solid black;
+    background: url("../src/rock.jpg");
+    background-size: cover;
+    height: 100px;
+    width: 114px;
+    padding: 3px;
+    cursor: pointer;
+}
+
+#paper-button {
+    border: 1px solid black;
+    background: url("../src/paper.jpg");
+    background-size: cover;
+    height: 100px;
+    width: 114px;
+    padding: 3px;
+    cursor: pointer;
+}
+
+#scissors-button {
+    border: 1px solid black;
+    background: url("../src/scissors.jpg");
+    background-size: cover;
+    height: 100px;
+    width: 114px;
+    padding: 3px;
+    cursor: pointer;
+}
+
+#laser-button {
+    border: 1px solid black;
+    background: url("../src/laser.jpg");
+    background-size: cover;
+    height: 100px;
+    width: 114px;
+    padding: 3px;
+    cursor: pointer;
+}
+
+#computer{
+    margin: 0 auto;
+    background: url("../src/run.png");
+    background-size: cover;
+    height: 55px;
+    width: 55px;
+    cursor: pointer;
+}
+
+#middle {
+    text-align: center;
+    font-size: 28px;
+}
+
+#winner{
+    text-align: center;
+    font-size: 36px;
+}
+
+#bottom{
+    position: absolute;
+    text-align: center;
+    font-size: 24px;
+    border: 1px solid black;
+    width: 20%;
+    bottom: 10px;
+    left: 40%;
+    right: 40%;
+}
