@@ -13,6 +13,6 @@ canvas {
     background: black;
 }
 
-#score{
+span{
     font-size: 36px;
 }
