@@ -104,7 +104,7 @@ function Player(posX, width, height) {
                     window.localStorage.setItem("highscore", score);
                     highscoreDisplay.innerText = highscore;
                 }
-                
+
                 startBtn.addEventListener("click", function () {
                     newGame();
                 });
