@@ -1,20 +1,27 @@
 const startBtn = document.getElementById("run");
 const resetBtn = document.getElementById("reset");
 
+disableButton(resetBtn);
+
+const scoreDisplay = document.getElementById("score");
+
 let canvas = document.getElementById("canvas");
 let ctx = canvas.getContext("2d");
 
-let shapes = {};
-let shapeIndex = 0;
-let fallSpeed = 4;
-let shapeGenerateSpeed = 100;
+let running;
+
+let blocks = {};
+let blocksIndex = 0;
+let fallSpeed = 5;
+let score = 0;
+let blockGenerateSpeed = 100;
 
 ctx.font = "78px Comic Sans MS";
 ctx.fillStyle = "white";
 ctx.textAlign = "center";
 ctx.fillText("Blox™", canvas.width / 2, canvas.height / 2 + 20);
 
-function Shape(posX, width, height) {
+function Block(posX, width, height) {
     this.Width = width;
     this.Height = height;
     this.Color = "#FFFFFF";
@@ -22,15 +29,15 @@ function Shape(posX, width, height) {
         X: posX,
         Y: -this.Height
     };
-    this.Velocity = Math.random() * fallSpeed + 5;
-    this.Index = shapeIndex;
+    this.Velocity = Math.floor(Math.random() * fallSpeed) + 5;
+    this.Index = blocksIndex;
 
-    shapes[shapeIndex] = this;
-    shapeIndex++;
+    blocks[blocksIndex] = this;
+    blocksIndex++;
 
     this.checkCollisions = function () {
         if (this.Position.Y >= canvas.height) {
-            delete shapes[this.Index];
+            delete blocks[this.Index];
         }
     };
     this.updatePosition = function () {
@@ -49,33 +56,75 @@ function Shape(posX, width, height) {
     }
 }
 
-function shapeGenerate() {
-    new Shape(Math.random() * canvas.width, 20, 20);
-}
+function Player(posX, width, height) {
+    this.Width = width;
+    this.Height = height;
+    this.Color = "Crimson";
+    this.Position = {X: posX, Y: canvas.height - this.Height};
+    this.Velocity = {X: 0, Y: 0,};
 
-function Updater() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    for (let i in shapes) {
-        shapes[i].update();
+    this.Draw = function () {
+        ctx.beginPath();
+        ctx.rect(this.Position.X, this.Position.Y, this.Width, this.Height);
+        ctx.fillStyle = this.Color;
+        ctx.fill();
+    };
+
+    this.update = function(){
+        this.Draw();
     }
 }
 
-function init(){
-    setInterval(Updater, 10);
-    setInterval(shapeGenerate, shapeGenerateSpeed);
+let player = new Player(canvas.width/2, 20, 20);
+
+function blockGenerate() {
+    if (running) {
+        new Block(Math.random() * canvas.width, 25, 25);
+        score++;
+        scoreDisplay.innerText = "" + score;
+    }
 }
 
-function disableButton(btn){
+function Updater() {
+    if (running) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let i in blocks) {
+            blocks[i].update();
+        }
+        player.update();
+    }
+}
+
+function startGame() {
+
+    setInterval(Updater, 10);
+    setInterval(blockGenerate, blockGenerateSpeed);
+
+}
+
+function disableButton(btn) {
     document.getElementById(btn.id).disabled = true;
 }
 
+function enableButton(btn) {
+    document.getElementById(btn.id).disabled = false;
+}
+
+
 startBtn.addEventListener("click", function () {
-    console.log("run");
     disableButton(startBtn);
-    init();
+    enableButton(resetBtn);
+
+    running = true;
+    startGame();
 });
 
 resetBtn.addEventListener("click", function () {
-   location.reload();
+    running = false;
+    enableButton(startBtn);
 });
+
+
+
+
 
