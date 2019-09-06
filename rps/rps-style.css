@@ -2,13 +2,17 @@ body {
     background: black;
 }
 
+a{
+    text-decoration: none;
+}
+
 #header {
     text-align: center;
     font-size: 36px;
 }
 
 #container {
-    margin: auto;
+    margin: 10px auto;
     background: white;
     height: 600px;
     width: 600px;
