@@ -20,15 +20,14 @@ let highscore = 0;
 highscore = localStorage.getItem("highscore");
 highscoreDisplay.innerText = highscore;
 
+
 ctx.font = "78px Comic Sans MS";
 ctx.fillStyle = "crimson";
 ctx.textAlign = "center";
 ctx.fillText("Blox™", canvas.width / 2, canvas.height / 2 + 20);
 
-const LEFT = 37;
-
 document.addEventListener("keydown", function (event) {
-    if (event.which === LEFT) {
+    if (event.which === 37) { //left
         player.Velocity.X = -5;
     } else if (event.which === 38) { //up
         player.Velocity.Y = -5;
@@ -45,7 +44,7 @@ document.addEventListener("keyup", function () {
 });
 
 function Block(posX, width, height) {
-    this.width = width;
+    this.Width = width;
     this.Height = height;
     this.Color = '#' + Math.floor(Math.random() * 16777215).toString(16);
     this.Position = {
